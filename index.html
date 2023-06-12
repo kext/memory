@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memory</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div id="app">
+    <div v-for="(card, i) in cards" :key="i" class="card" @click="flip(i)" :class="{flipped: card.hidden}">
+      <div class="inner">
+        <div class="front" :style="img(card.image)"></div>
+        <div class="back"></div>
+      </div>
+    </div>
+  </div>
+  <script src="vue.global.prod.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

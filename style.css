@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  background: #333;
+}
+body {
+  margin: 0;
+  display: grid;
+  place-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+#app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 96vmin;
+  height: 96vmin;
+}
+.card {
+  width: 23vmin;
+  height: 23vmin;
+  padding: 2vmin;
+  position: relative;
+  overflow: visible;
+  perspective: 1000px;
+}
+.card .inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+.card .front, .card .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  border-radius: 0.25rem;
+}
+.card .front {
+  border: 0.5rem solid #eee;
+  background-position: center;
+  background-size: cover;
+}
+.card .back {
+  background: #eee;
+}
+.card.flipped .inner, .card .back {
+  transform: rotateY(180deg);
+}
