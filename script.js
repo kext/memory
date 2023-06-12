@@ -20,31 +20,32 @@ const app = Vue.createApp({
   data() {
     return {
       cards: createCards(16),
-      card1: null,
-      card2: null
+      tmp: null,
+      found: 0
     }
   },
   methods: {
     flip(i) {
-      if (this.cards[i].hidden && this.card2 === null) {
-        this.cards[i].hidden = !this.cards[i].hidden
-        if (this.card1 === null) {
-          this.card1 = i
+      if (this.cards[i].hidden) {
+        this.cards[i].hidden = false
+        if (this.tmp === null) {
+          this.tmp = i
         } else {
-          this.card2 = i
-          if (this.cards[this.card1].image === this.cards[this.card2].image) {
-            this.card1 = null
-            this.card2 = null
+          if (this.cards[this.tmp].image === this.cards[i].image) {
+            this.tmp = null
+            this.found += 2
+            if (this.found === this.cards.length) {
+              setTimeout(() => {
+                this.found = 0
+                this.cards = createCards(this.cards.length)
+              }, 5000)
+            }
           } else {
+            const j = this.tmp
+            this.tmp = null
             setTimeout(() => {
-              if (this.card1 !== null) {
-                this.cards[this.card1].hidden = !this.cards[this.card1].hidden
-                this.card1 = null
-              }
-              if (this.card2 !== null) {
-                this.cards[this.card2].hidden = !this.cards[this.card2].hidden
-                this.card2 = null
-              }
+              this.cards[i].hidden = true
+              this.cards[j].hidden = true
             }, 1000)
           }
         }
