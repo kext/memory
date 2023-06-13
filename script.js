@@ -26,7 +26,7 @@ const app = Vue.createApp({
   },
   methods: {
     flip(i) {
-      if (this.cards[i].hidden) {
+      if (this.found < this.cards.length && this.cards[i].hidden) {
         this.cards[i].hidden = false
         if (this.tmp === null) {
           this.tmp = i
@@ -36,8 +36,11 @@ const app = Vue.createApp({
             this.found += 2
             if (this.found === this.cards.length) {
               setTimeout(() => {
-                this.found = 0
-                this.cards = createCards(this.cards.length)
+                this.cards.forEach(c => c.hidden = true)
+                setTimeout(() => {
+                  this.cards = createCards(this.cards.length)
+                  this.found = 0
+                }, 600)
               }, 5000)
             }
           } else {
