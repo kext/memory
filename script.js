@@ -62,3 +62,13 @@ const app = Vue.createApp({
   }
 })
 .mount('#app')
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'f') {
+    if (document.fullscreenElement) {
+      document.exitFullscreen()
+    } else {
+      document.querySelector('html').requestFullscreen()
+    }
+  }
+})
